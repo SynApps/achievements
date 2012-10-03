@@ -1,3 +1,7 @@
-class Report < Ohm::Model
-  extend ::EventHandler
+module Achievements
+  module Infra
+    class Report < Ohm::Model
+      extend Achievements::Infra::EventHandler
+    end
+  end
 end

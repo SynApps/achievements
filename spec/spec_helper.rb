@@ -4,6 +4,7 @@
 # loaded once.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+require 'achievements'
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true
   config.run_all_when_everything_filtered = true
@@ -14,4 +15,22 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = 'random'
+end
+
+
+module Achievements
+  module Infra
+    class Event
+      @@applied_events = []
+      def new
+        result = super
+        @@applied_events << self
+        result
+      end
+
+      def self.applied_events
+        @@applied_events
+      end
+    end
+  end 
 end
